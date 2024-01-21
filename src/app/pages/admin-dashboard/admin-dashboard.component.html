@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+@if(showUsersTable){
+<app-users-table (onShowCouponsUserTableEvent)="onShowCouponsUserTable($event)"></app-users-table>
+}
+@if(showCouponsUserTable){
+<app-coupons-user-table [user]="userToShow" (onShowUsersTableEvent)="onShowUsersTable()"
+  (handleAddDateModal)="handleAddDateModal($event)"></app-coupons-user-table>
+}
+
+@if(showAddDateModal){
+  <app-add-date-modal (handleAddDateModal)="handleAddDateModal($event)"
+  [bookingCoupon]="couponToModify"></app-add-date-modal>
+}

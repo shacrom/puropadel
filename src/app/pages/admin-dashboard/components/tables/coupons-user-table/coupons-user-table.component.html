@@ -1,0 +1,32 @@
+<div class="flex items-center justify-center ">
+  <div class="overflow-x-auto">
+    <table class="min-w-full table-auto">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-4 py-2 text-left text-gray-600">ID</th>
+          <th class="px-4 py-2 text-left text-gray-600">Bono</th>
+          <th class="px-4 py-2 text-left text-gray-600">Precio</th>
+          <th class="px-4 py-2 text-left text-gray-600">Divisa</th>
+          @for(column of hourColumnsToShow; track user.identityCard; let idx = $index){
+          <th class="px-4 py-2 text-left text-gray-600">Hora {{idx + 1}}</th>
+          }
+          <th class="px-4 py-2 text-left text-gray-600">Descontar hora?</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (data of tableData; track idx; let idx = $index) {
+        <tr>
+          @for(cell of data; track idy; let idy = $index){
+            <td>{{cell}}</td>
+          }
+          <td>
+            <button type="button" (click)="showModal(data)">
+              Añadir
+            </button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="flex items-center justify-center ">
+  <div class="overflow-x-auto">
+    <table class="min-w-full table-auto">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-4 py-2 text-left text-gray-600">Nombre</th>
+          <th class="px-4 py-2 text-left text-gray-600">Apellido</th>
+          <th class="px-4 py-2 text-left text-gray-600">Correo</th>
+          <th class="px-4 py-2 text-left text-gray-600">Teléfono</th>
+          <th class="px-4 py-2 text-left text-gray-600">Cédula</th>
+          <th class="px-4 py-2 text-left text-gray-600">Bonos</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of users; track user.identityCard) {
+        <tr class="bg-gray-50">
+          <td class="border px-4 py-2">{{user.name}}</td>
+          <td class="border px-4 py-2">{{user.lastname}}</td>
+          <td class="border px-4 py-2">{{user.email}}</td>
+          <td class="border px-4 py-2">{{user.phone}}</td>
+          <td class="border px-4 py-2">{{user.identityCard}}</td>
+          <td class="border px-4 py-2">
+            @if(user.bookingCoupons){
+            <button (click)="triggerEvent(user)">
+              <i class="material-icons">confirmation_number</i>
+            </button>
+            }
+          </td>
+        </tr>
+        } @empty {
+        Empty list of users
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
