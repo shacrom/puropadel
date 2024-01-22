@@ -1,4 +1,4 @@
 export interface CouponUsage{
-  hoursSpent: number;
-  dateUsed: Date;
+  hoursSpent?: number;
+  dateUsed?: Date;
 }

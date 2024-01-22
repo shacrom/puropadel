@@ -14,13 +14,21 @@
         </tr>
       </thead>
       <tbody>
-        @for (data of tableData; track idx; let idx = $index) {
+        @for (row of tableData; track row.id; let idx = $index) {
         <tr>
-          @for(cell of data; track idy; let idy = $index){
-            <td>{{cell}}</td>
+          <td>{{row.id}}</td>
+          <td>{{row.name}}</td>
+          <td>{{row.price}}</td>
+          <td>{{row.currency}}</td>
+          @for(couponUsage of row.couponUsages; track idy; let idy = $index){
+          @if(couponUsage.dateUsed){
+          <td>{{formatDate(couponUsage.dateUsed)}}</td>
+          } @else {
+          <td></td>
+          }
           }
           <td>
-            <button type="button" (click)="showModal(data)">
+            <button type="button" (click)="showModal(row)">
               Añadir
             </button>
           </td>
