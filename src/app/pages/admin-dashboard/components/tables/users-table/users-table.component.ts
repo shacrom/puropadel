@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
-import { MOCKS_USERS } from '../../../../../data/UsersMock';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { User } from '../../../../../models/User';
+import { MOCKS_USERS } from '../../../../../data/UsersMock';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users-table',
@@ -12,10 +13,11 @@ import { User } from '../../../../../models/User';
 })
 export class UsersTableComponent {
   @Output() onShowCouponsUserTableEvent = new EventEmitter<User>();
+  @Input() users = MOCKS_USERS;
 
-  users = MOCKS_USERS;
-
-  triggerEvent(user: User){
-    this.onShowCouponsUserTableEvent.emit(user);
+  constructor(private router: Router){}
+ 
+  goToCouponsUser(user: User){
+    this.router.navigate(['/admin-dashboard/users', user.id, 'coupons']);
   }
 }

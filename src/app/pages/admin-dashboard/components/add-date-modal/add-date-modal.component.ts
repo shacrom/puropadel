@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CouponUsage } from '../../../../models/CouponUsage';
-import { formatDate } from '../../../../shared/formatDate';
+import { BookingCoupon } from '../../../../models/BookingCoupon';
 
 @Component({
   selector: 'app-add-date-modal',
@@ -12,8 +12,8 @@ import { formatDate } from '../../../../shared/formatDate';
 })
 export class AddDateModalComponent implements OnInit {
 
-  @Input() bookingCoupon: string[] = [];
-  @Output() handleAddDateModal = new EventEmitter<void>();
+  @Input() couponToModify!: BookingCoupon;
+  @Output() handleAddDateModal = new EventEmitter<BookingCoupon>();
 
   couponUsageForm: FormGroup;
 
@@ -30,12 +30,19 @@ export class AddDateModalComponent implements OnInit {
   }
 
   onSubmit() {
-    let index = this.bookingCoupon.findIndex(field => field === "");    
-    this.bookingCoupon[index] = formatDate(new Date(this.couponUsageForm.get('dateUsed')?.value));
-    this.handleAddDateModal.emit();
-  }
+    if(!this.couponToModify.couponUsages){
+      this.couponToModify.couponUsages = [] as CouponUsage[];
+    }
 
-  closeModal() {
-    this.handleAddDateModal.emit();
+    let auxBookingCoupon = this.couponToModify;
+    let auxCouponUsage: CouponUsage = {
+      dateUsed: new Date(this.couponUsageForm.get("dateUsed")?.value),
+      hoursSpent: parseFloat(this.couponUsageForm.get("hoursSpent")?.value),
+    }
+    let bookingCouponToModifyIndex = this.couponToModify.couponUsages.findIndex(coupon => coupon.dateUsed === undefined);
+    if(auxBookingCoupon.couponUsages){
+      auxBookingCoupon.couponUsages[bookingCouponToModifyIndex] = auxCouponUsage;
+      this.handleAddDateModal.emit(auxBookingCoupon);
+    }
   }
 }

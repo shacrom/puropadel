@@ -1,3 +1,4 @@
+
 <div class="flex items-center justify-center ">
   <div class="overflow-x-auto">
     <table class="min-w-full table-auto">
@@ -28,7 +29,7 @@
           }
           }
           <td>
-            <button type="button" (click)="showModal(row)">
+            <button type="button" (click)="onAddDate(row)">
               Añadir
             </button>
           </td>
@@ -38,3 +39,7 @@
     </table>
   </div>
 </div>
+
+@if(showModal){
+  <app-add-date-modal [couponToModify]="couponToModify"></app-add-date-modal>
+}

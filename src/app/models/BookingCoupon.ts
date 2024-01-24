@@ -7,5 +7,5 @@ export interface BookingCoupon{
   price: number,
   currency: Currency,
   totalHours: number,
-  couponUsages: CouponUsage[],
+  couponUsages?: CouponUsage[],
 }
