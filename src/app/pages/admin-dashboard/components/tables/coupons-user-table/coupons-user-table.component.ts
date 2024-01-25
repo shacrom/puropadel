@@ -5,6 +5,8 @@ import { CouponUsage } from '../../../../../models/CouponUsage';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MOCKS_USERS } from '../../../../../data/UsersMock';
 import { AddDateModalComponent } from '../../add-date-modal/add-date-modal.component';
+import { formatDate } from '@angular/common';
+import { convertToDate } from '../../../../../shared/formatDate';
 
 @Component({
   selector: 'app-coupons-user-table',
@@ -63,26 +65,34 @@ export class CouponsUserTableComponent {
     return maxColumQuantity;
   }
 
+  formatDateTable(date: Date): string {
+    return date.getDate() + "/" + date.getMonth() + 1 + "/" + date.getFullYear();
+  }
+
   buildTable() {
+    let contador = 0;
     if (this.user.bookingCoupons) {
+      console.log(this.user.bookingCoupons);
+      
       this.user.bookingCoupons.forEach(bookingCoupon => {
         let couponUsagesAux: CouponUsage[] = [];
-
         bookingCoupon.couponUsages?.forEach(couponUsage => {
-
           if (couponUsage.dateUsed) {
+            console.log(formatDate(couponUsage.dateUsed, "dd-MM-YYYY", "en-US"));
+            
             couponUsagesAux.push({
-              dateUsed: new Date(this.formatDate(couponUsage.dateUsed)),
+              dateUsed: convertToDate(formatDate(couponUsage.dateUsed, "dd-MM-YYYY", "en-US")),
               hoursSpent: couponUsage.hoursSpent,
             });
           }
 
         });
-
+        
         while (couponUsagesAux.length < this.hourColumnsToShow.length) {
           couponUsagesAux.push({});
         }
-
+        console.log(couponUsagesAux);
+        
         let bookingCouponAux: BookingCoupon = {
           id: bookingCoupon.id,
           name: bookingCoupon.name,
@@ -96,12 +106,12 @@ export class CouponsUserTableComponent {
     }
   }
 
-  formatDate(date: Date): string {
-    return date.getDay() + "/" + date.getMonth() + 1 + "/" + date.getFullYear();
-  }
-
   onAddDate(data: BookingCoupon) {
     this.showModal = !this.showModal;
     this.couponToModify = data;
+  }
+
+  closeModal(){
+    this.showModal = !this.showModal;
   }
 }

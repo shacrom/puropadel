@@ -13,8 +13,8 @@ import { BookingCoupon } from '../../../../models/BookingCoupon';
 export class AddDateModalComponent implements OnInit {
 
   @Input() couponToModify!: BookingCoupon;
-  @Output() handleAddDateModal = new EventEmitter<BookingCoupon>();
-
+  @Output() addDate = new EventEmitter<BookingCoupon>();
+  
   couponUsageForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -33,6 +33,8 @@ export class AddDateModalComponent implements OnInit {
     if(!this.couponToModify.couponUsages){
       this.couponToModify.couponUsages = [] as CouponUsage[];
     }
+    console.log(this.couponUsageForm.value);
+    
 
     let auxBookingCoupon = this.couponToModify;
     let auxCouponUsage: CouponUsage = {
@@ -42,7 +44,7 @@ export class AddDateModalComponent implements OnInit {
     let bookingCouponToModifyIndex = this.couponToModify.couponUsages.findIndex(coupon => coupon.dateUsed === undefined);
     if(auxBookingCoupon.couponUsages){
       auxBookingCoupon.couponUsages[bookingCouponToModifyIndex] = auxCouponUsage;
-      this.handleAddDateModal.emit(auxBookingCoupon);
+      this.addDate.emit(auxBookingCoupon);
     }
   }
 }
