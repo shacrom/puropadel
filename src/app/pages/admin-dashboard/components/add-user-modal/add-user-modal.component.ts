@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { User } from '../../../../models/User';
+import { AddUserModalStateService } from '../../../../services/add-user-modal-state.service';
+import { UsersService } from '../../../../services/users.service';
 
 @Component({
   selector: 'app-add-user-modal',
@@ -13,9 +15,14 @@ export class AddUserModalComponent {
 
   @Output() handleAddUserModal = new EventEmitter<User>();
   newUserForm: FormGroup;
+  showModal: boolean = false;
 
+  constructor(private fb: FormBuilder, private addUserModalService: AddUserModalStateService, private usersService: UsersService) {
 
-  constructor(private fb: FormBuilder) { 
+    this.addUserModalService.showModal$.subscribe(show => {
+      this.showModal = show;
+    });
+
     this.newUserForm = fb.group({
       name: '',
       lastname: '',
@@ -25,12 +32,11 @@ export class AddUserModalComponent {
     });
   }
 
-  
-
   onSubmit(event: Event) {
     event.preventDefault();
-    console.log(this.newUserForm.value);
-    
-    this.handleAddUserModal.emit(this.newUserForm.value as User);
+    let aux = this.usersService.getUsers();
+    aux.push(this.newUserForm.value);
+    this.usersService.setUsers(aux);
+    this.addUserModalService.setShowModal(false);
   }
 }

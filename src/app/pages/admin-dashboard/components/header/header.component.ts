@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { UsersService } from '../../../../services/users.service';
+import { AddUserModalStateService } from '../../../../services/add-user-modal-state.service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +14,7 @@ export class HeaderComponent {
   
   component: string | undefined = "";
 
-  constructor(private route: ActivatedRoute){}
+  constructor(private route: ActivatedRoute, private addUserModalService: AddUserModalStateService){}
 
   ngOnInit(){
     this.component = this.route.children[0].component?.name;
@@ -21,7 +23,7 @@ export class HeaderComponent {
   }
 
   onAddUser(){
-    
+    this.addUserModalService.setShowModal(true);
   }
 
   onAddCoupon(){
