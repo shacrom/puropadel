@@ -9,11 +9,21 @@ import { AddUserModalComponent } from './components/add-user-modal/add-user-moda
 import { MOCKS_USERS } from '../../data/UsersMock';
 import { RouterModule } from '@angular/router';
 import { CouponsUserTableComponent } from './components/tables/coupons-user-table/coupons-user-table.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [SidebarComponent, NavbarComponent, UsersTableComponent, AddDateModalComponent, AddUserModalComponent, RouterModule, CouponsUserTableComponent],
+  imports: [
+    SidebarComponent,
+    NavbarComponent,
+    UsersTableComponent,
+    AddDateModalComponent,
+    AddUserModalComponent,
+    RouterModule,
+    CouponsUserTableComponent,
+    HeaderComponent,
+  ],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.css'
 })
@@ -24,7 +34,7 @@ export class AdminDashboardComponent {
   showAddUserModal = false;
   userToShow!: User;
 
-  onShowAddUserModal(){
+  onShowAddUserModal() {
     this.showAddUserModal = !this.showAddUserModal;
   }
 
@@ -39,7 +49,7 @@ export class AdminDashboardComponent {
     this.showCouponsUserTable = false;
   }
 
-  handleAddUserModal(user: User){
+  handleAddUserModal(user: User) {
     this.users.push(user);
     this.showAddUserModal = !this.showAddUserModal;
     console.log(this.users.length);
