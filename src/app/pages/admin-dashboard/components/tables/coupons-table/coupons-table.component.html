@@ -1,1 +1,37 @@
-<p>coupons-table works!</p>
+<div class="flex items-center justify-center ">
+  <div class="overflow-x-auto">
+    <table class="min-w-full table-auto">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-4 py-2 text-left text-gray-600">ID</th>
+          <th class="px-4 py-2 text-left text-gray-600">Bono</th>
+          <th class="px-4 py-2 text-left text-gray-600">Precio</th>
+          <th class="px-4 py-2 text-left text-gray-600">Divisa</th>
+          <th class="px-4 py-2 text-left text-gray-600">Horas totales</th>
+          <th class="px-4 py-2 text-left text-gray-600">Borrar</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(couponType of bookingCouponsTypes; track couponType.id){
+        <tr>
+          <td class="border px-4 py-2">{{couponType.id}}</td>
+          <td class="border px-4 py-2">{{couponType.name}}</td>
+          <td class="border px-4 py-2">{{couponType.price}}</td>
+          <td class="border px-4 py-2">{{couponType.currency}}</td>
+          <td class="border px-4 py-2">{{couponType.totalHours}}</td>
+          <td class="border px-4 py-2">
+            <button class="px-4" (click)="deleteCoupon(couponType.id)">
+              X
+            </button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- @if(showModal){
+<app-add-date-modal [couponToModify]="couponToModify" (closeModal)="closeModal()"
+  (addDate)="onAddDate($event)"></app-add-date-modal>
+} -->
