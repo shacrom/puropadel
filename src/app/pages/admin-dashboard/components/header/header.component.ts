@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../../../services/users.service';
 import { AddUserModalStateService } from '../../../../services/add-user-modal-state.service';
+import { BookingCouponsService } from '../../../../services/booking-coupons.service';
+import { AddCouponModalComponent } from '../add-coupon-modal/add-coupon-modal.component';
+import { AddCouponModalService } from '../../../../services/add-coupon-modal.service';
 
 @Component({
   selector: 'app-header',
@@ -11,27 +14,31 @@ import { AddUserModalStateService } from '../../../../services/add-user-modal-st
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  
+
   component: string | undefined = "";
 
-  constructor(private route: ActivatedRoute, private addUserModalService: AddUserModalStateService){}
+  constructor(
+    private route: ActivatedRoute,
+    private addUserModalService: AddUserModalStateService,
+    private addCouponModalService: AddCouponModalService,
+  ) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.component = this.route.children[0].component?.name;
     console.log(this.component);
-    
+
   }
 
-  onAddUser(){
+  onAddUser() {
     this.addUserModalService.setShowModal(true);
   }
 
-  onAddCoupon(){
+  onAddCoupon() {
+    this.addCouponModalService.setShowModal(true);
+  }
+
+  onCreateCoupon() {
 
   }
 
-  onCreateCoupon(){
-
-  }
-  
 }

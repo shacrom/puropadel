@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { MOCKS_BOOKING_COUPONS } from '../../../../../data/BookingCouponsMock';
+import { BookingCoupon } from '../../../../../models/BookingCoupon';
+import { BookingCouponsService } from '../../../../../services/booking-coupons.service';
 
 @Component({
   selector: 'app-coupons-table',
@@ -9,8 +11,12 @@ import { MOCKS_BOOKING_COUPONS } from '../../../../../data/BookingCouponsMock';
   styleUrl: './coupons-table.component.css'
 })
 export class CouponsTableComponent {
-  bookingCouponsTypes = MOCKS_BOOKING_COUPONS;
+  bookingCouponsTypes;
   
+  constructor(private bookingsService: BookingCouponsService){
+    this.bookingCouponsTypes = this.bookingsService.getBookingCoupons();
+  }
+
   ngOnInit() {
     console.log(this.bookingCouponsTypes);
   }
