@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { MOCKS_BOOKING_COUPONS } from '../../../../../data/BookingCouponsMock';
-import { BookingCoupon } from '../../../../../models/BookingCoupon';
 import { BookingCouponsService } from '../../../../../services/booking-coupons.service';
+import { AddCouponModalComponent } from '../../add-coupon-modal/add-coupon-modal.component';
 
 @Component({
   selector: 'app-coupons-table',
   standalone: true,
-  imports: [],
+  imports: [AddCouponModalComponent],
   templateUrl: './coupons-table.component.html',
   styleUrl: './coupons-table.component.css'
 })

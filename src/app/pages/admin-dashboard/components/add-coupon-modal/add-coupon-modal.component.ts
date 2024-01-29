@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AddCouponModalService } from '../../../../services/add-coupon-modal.service';
+import { BookingCouponsService } from '../../../../services/booking-coupons.service';
 
 @Component({
   selector: 'app-add-coupon-modal',
@@ -14,7 +15,7 @@ export class AddCouponModalComponent {
   newCouponForm: FormGroup;
   showModal: boolean = false;
 
-  constructor(private fb: FormBuilder, private addCouponModalService: AddCouponModalService){
+  constructor(private fb: FormBuilder, private addCouponModalService: AddCouponModalService, private bookingCouponsService: BookingCouponsService){
 
     this.addCouponModalService.showModal$.subscribe(show => {
       this.showModal = show;
@@ -28,7 +29,11 @@ export class AddCouponModalComponent {
     });
   }
 
-  onSubmit(){
-
+  onSubmit(event: Event){
+    event.preventDefault();
+    let aux = this.bookingCouponsService.getBookingCoupons();
+    aux.push(this.newCouponForm.value);
+    this.bookingCouponsService.setBookingCoupons(aux);
+    this.addCouponModalService.setShowModal(false);
   }
 }

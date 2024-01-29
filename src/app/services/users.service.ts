@@ -13,11 +13,13 @@ export class UsersService {
     this.users = MOCKS_USERS;  
   }
 
-  setUsers(users: User[]): void {
-    this.users = users;
-  }
-
   getUsers(): User[] {
     return this.users;
+  }
+
+  setUsers(users: User[]): void {
+    this.users = users;
+    console.log(this.users);
+    
   }
 }

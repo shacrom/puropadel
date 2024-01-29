@@ -7,11 +7,12 @@ import { MOCKS_USERS } from '../../../../../data/UsersMock';
 import { AddDateModalComponent } from '../../add-date-modal/add-date-modal.component';
 import { formatDate } from '@angular/common';
 import { convertToDate } from '../../../../../shared/formatDate';
+import { AssignCouponComponent } from '../../assign-coupon/assign-coupon.component';
 
 @Component({
   selector: 'app-coupons-user-table',
   standalone: true,
-  imports: [AddDateModalComponent],
+  imports: [AddDateModalComponent, AssignCouponComponent],
   templateUrl: './coupons-user-table.component.html',
   styleUrl: './coupons-user-table.component.css'
 })
@@ -30,7 +31,6 @@ export class CouponsUserTableComponent {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.user = MOCKS_USERS.find(user => user.id == params.get('id')) as User;
-
     });
     this.hourColumnsToShow = Array(this.calculateMaxCouponHours()).fill(0).map((x, i) => i);
     this.buildTable();
@@ -72,14 +72,10 @@ export class CouponsUserTableComponent {
   buildTable() {
     let contador = 0;
     if (this.user.bookingCoupons) {
-      console.log(this.user.bookingCoupons);
-      
       this.user.bookingCoupons.forEach(bookingCoupon => {
         let couponUsagesAux: CouponUsage[] = [];
         bookingCoupon.couponUsages?.forEach(couponUsage => {
           if (couponUsage.dateUsed) {
-            console.log(formatDate(couponUsage.dateUsed, "dd-MM-YYYY", "en-US"));
-            
             couponUsagesAux.push({
               dateUsed: convertToDate(formatDate(couponUsage.dateUsed, "dd-MM-YYYY", "en-US")),
               hoursSpent: couponUsage.hoursSpent,
@@ -91,7 +87,6 @@ export class CouponsUserTableComponent {
         while (couponUsagesAux.length < this.hourColumnsToShow.length) {
           couponUsagesAux.push({});
         }
-        console.log(couponUsagesAux);
         
         let bookingCouponAux: BookingCoupon = {
           id: bookingCoupon.id,
