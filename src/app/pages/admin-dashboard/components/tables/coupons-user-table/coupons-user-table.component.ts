@@ -1,13 +1,13 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { User } from '../../../../../models/User';
 import { BookingCoupon } from '../../../../../models/BookingCoupon';
 import { CouponUsage } from '../../../../../models/CouponUsage';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { MOCKS_USERS } from '../../../../../data/UsersMock';
+import { ActivatedRoute } from '@angular/router';
 import { AddDateModalComponent } from '../../add-date-modal/add-date-modal.component';
 import { formatDate } from '@angular/common';
 import { convertToDate } from '../../../../../shared/formatDate';
 import { AssignCouponComponent } from '../../assign-coupon/assign-coupon.component';
+import { UsersService } from '../../../../../services/users.service';
 
 @Component({
   selector: 'app-coupons-user-table',
@@ -22,18 +22,21 @@ export class CouponsUserTableComponent {
   remianingHours: number = 0;
   hourColumnsToShow: number[] = [];
   tableData: BookingCoupon[] = [];
-  users = MOCKS_USERS;
   showModal = false;
   couponToModify!: BookingCoupon;
 
-  constructor(private route: ActivatedRoute){}
+  constructor(
+    private route: ActivatedRoute,
+    private usersService: UsersService,
+    ){}
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.user = MOCKS_USERS.find(user => user.id == params.get('id')) as User;
+      this.usersService.users$.subscribe(users => {
+        this.user = users.find(user => user.id == params.get('id')) as User;
+        this.buildTable();
+      });
     });
-    this.hourColumnsToShow = Array(this.calculateMaxCouponHours()).fill(0).map((x, i) => i);
-    this.buildTable();
   }
 
   calculateRemainingHours() {
@@ -70,6 +73,7 @@ export class CouponsUserTableComponent {
   }
 
   buildTable() {
+    this.tableData = [];
     let contador = 0;
     if (this.user.bookingCoupons) {
       this.user.bookingCoupons.forEach(bookingCoupon => {

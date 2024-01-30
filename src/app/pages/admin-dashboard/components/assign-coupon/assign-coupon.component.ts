@@ -58,9 +58,7 @@ export class AssignCouponComponent {
       if (coupon) {
         user.bookingCoupons.push(coupon);
       }
-      users[userIndex] = user;
-      
-      this.usersService.setUsers(users);
+      this.usersService.updateUser(user);      
     }
 
     this.assignCouponModalService.setShowModal(false);
