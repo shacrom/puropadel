@@ -10,13 +10,13 @@ export class UsersService {
 
   private usersSubject = new BehaviorSubject<User[]>(MOCKS_USERS);
   users$ = this.usersSubject.asObservable();
-  
+
   updateUser(newUser: User) {
     let users = this.usersSubject.value;
     let userIndex = users.findIndex(user => user.id === newUser.id);
     
     users[userIndex] = newUser;
-
+    
     this.usersSubject.next(users);
   }
 

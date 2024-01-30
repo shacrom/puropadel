@@ -28,12 +28,13 @@ export class CouponsUserTableComponent {
   constructor(
     private route: ActivatedRoute,
     private usersService: UsersService,
-    ){}
+  ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.usersService.users$.subscribe(users => {
         this.user = users.find(user => user.id == params.get('id')) as User;
+        this.hourColumnsToShow = Array(this.calculateMaxCouponHours()).fill(0).map((x, i) => i);
         this.buildTable();
       });
     });
@@ -59,11 +60,12 @@ export class CouponsUserTableComponent {
     let maxColumQuantity: number = 0;
     if (this.user.bookingCoupons) {
       this.user.bookingCoupons.forEach(bookingCoupon => {
-        if (bookingCoupon.couponUsages!.length > maxColumQuantity) {
-          maxColumQuantity = bookingCoupon.totalHours;
+        if(bookingCoupon.couponUsages){
+          if (bookingCoupon.couponUsages.length > maxColumQuantity) {
+            maxColumQuantity = bookingCoupon.totalHours;
+          }
         }
       })
-
     }
     return maxColumQuantity;
   }
@@ -87,11 +89,11 @@ export class CouponsUserTableComponent {
           }
 
         });
-        
+
         while (couponUsagesAux.length < this.hourColumnsToShow.length) {
           couponUsagesAux.push({});
         }
-        
+
         let bookingCouponAux: BookingCoupon = {
           id: bookingCoupon.id,
           name: bookingCoupon.name,
@@ -110,7 +112,7 @@ export class CouponsUserTableComponent {
     this.couponToModify = data;
   }
 
-  closeModal(){
+  closeModal() {
     this.showModal = !this.showModal;
   }
 }
