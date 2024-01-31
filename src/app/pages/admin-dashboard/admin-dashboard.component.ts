@@ -52,6 +52,5 @@ export class AdminDashboardComponent {
   handleAddUserModal(user: User) {
     this.users.push(user);
     this.showAddUserModal = !this.showAddUserModal;
-    console.log(this.users.length);
   }
 }
