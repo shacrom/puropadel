@@ -15,6 +15,10 @@ export const routes: Routes = [
     path: 'admin-dashboard',
     component: AdminDashboardComponent,
     children: [
+      { path: '', 
+        pathMatch: 'full', 
+        redirectTo: 'users' 
+      },
       {
         path: 'users',
         component: UsersTableComponent,
