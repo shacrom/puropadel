@@ -1,15 +1,17 @@
 <header class="bg-white shadow">
   <div class="flex justify-between mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-    <h1 class="text-3xl font-bold tracking-tight text-gray-900"></h1>
     @if(showAddUserButton){
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Cliente</h1>
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="onAddUser()">
         Añadir cliente
       </button>
     } @else if (showAssignCouponButton){
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Bonos del cliente</h1>
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="onAssignCoupon()">
         Asignar bono
       </button>
     } @else if(showCreateCouponButton){
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Bonos</h1>
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="onCreateCoupon()">
         Crear bono
       </button>
