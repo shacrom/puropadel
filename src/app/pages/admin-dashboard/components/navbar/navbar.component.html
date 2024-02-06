@@ -9,8 +9,8 @@
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="/admin-dashboard/users" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Clientes</a>
-              <a href="/admin-dashboard/coupons" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Bonos</a>
+              <button (click)="goToUsers()" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Clientes</button>
+              <button (click)="goToCoupons()" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Bonos</button>
             </div>
           </div>
         </div>

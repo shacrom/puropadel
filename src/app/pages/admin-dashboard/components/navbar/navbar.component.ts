@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,4 +10,14 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class NavbarComponent {
   
+  constructor(private router: Router) {
+  }
+
+  goToUsers(){
+    this.router.navigate(['/admin-dashboard/users'])
+  }
+
+  goToCoupons() {
+    this.router.navigate(['/admin-dashboard/coupons']);
+  }
 }
