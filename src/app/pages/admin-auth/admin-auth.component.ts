@@ -19,8 +19,6 @@ export class AdminAuthComponent {
 
   onSubmit() {
     if (this.username == "admin" && this.password == "admin") {
-      this.admin.username = this.username;
-      this.admin.password = this.password;
       this.router.navigate(['/admin-dashboard']);
     } else {
       alert("Datos de inicio de sesión incorrectos");
