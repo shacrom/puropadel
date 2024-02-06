@@ -39,4 +39,8 @@ export class AddUserModalComponent {
     this.usersService.setUsers(aux);
     this.addUserModalService.setShowModal(false);
   }
+
+  onCancel(){
+    this.addUserModalService.setShowModal(false);
+  }
 }

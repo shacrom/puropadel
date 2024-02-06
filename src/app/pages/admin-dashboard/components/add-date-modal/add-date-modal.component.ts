@@ -14,7 +14,7 @@ export class AddDateModalComponent implements OnInit {
 
   @Input() couponToModify!: BookingCoupon;
   @Output() addDate = new EventEmitter<BookingCoupon>();
-  
+  @Output() closeModal = new EventEmitter<void>();
   couponUsageForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -32,9 +32,7 @@ export class AddDateModalComponent implements OnInit {
   onSubmit() {
     if(!this.couponToModify.couponUsages){
       this.couponToModify.couponUsages = [] as CouponUsage[];
-    }
-    console.log(this.couponUsageForm.value);
-    
+    }    
 
     let auxBookingCoupon = this.couponToModify;
     let auxCouponUsage: CouponUsage = {
@@ -46,5 +44,9 @@ export class AddDateModalComponent implements OnInit {
       auxBookingCoupon.couponUsages[bookingCouponToModifyIndex] = auxCouponUsage;
       this.addDate.emit(auxBookingCoupon);
     }
+  }
+
+  onCancel(){
+    this.closeModal.emit();
   }
 }

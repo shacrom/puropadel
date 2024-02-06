@@ -63,4 +63,8 @@ export class AssignCouponComponent {
 
     this.assignCouponModalService.setShowModal(false);
   }
+
+  onCancel(){
+    this.assignCouponModalService.setShowModal(false);
+  }
 }

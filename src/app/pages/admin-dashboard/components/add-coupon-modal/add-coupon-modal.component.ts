@@ -36,4 +36,8 @@ export class AddCouponModalComponent {
     this.bookingCouponsService.setBookingCoupons(aux);
     this.addCouponModalService.setShowModal(false);
   }
+
+  onCancel(){
+    this.addCouponModalService.setShowModal(false);
+  }
 }

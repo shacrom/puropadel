@@ -1,41 +1,46 @@
 @if(showModal){
-  <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-    <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
-      <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-        <div
-          class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg  py-5 px-5">
-          <form [formGroup]="newCouponForm" (submit)="onSubmit($event)">
-            <div class="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Bono</label>
-              <input type="text" id="name" formControlName="name"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-            <div class="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="price">Precio</label>
-              <input type="text" id="price" formControlName="price"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-            <div class="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="currency">Divisa</label>
-              <input type="text" id="currency" formControlName="currency"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-            <div class="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Horas totales</label>
-              <input type="number" id="totalHours" formControlName="totalHours"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-            <div class="flex items-center justify-between">
-              <button
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="submit">
-                Añadir
-              </button>
-            </div>
-          </form>
-        </div>
+<div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+  <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+    <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+      <div
+        class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg  py-5 px-5">
+        <form [formGroup]="newCouponForm" (submit)="onSubmit($event)">
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Bono</label>
+            <input type="text" id="name" formControlName="name"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="price">Precio</label>
+            <input type="text" id="price" formControlName="price"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="currency">Divisa</label>
+            <input type="text" id="currency" formControlName="currency"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Horas totales</label>
+            <input type="number" id="totalHours" formControlName="totalHours"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          </div>
+          <div class="flex items-center justify-between">
+            <button
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              (click)="onCancel()">
+              Cancelar
+            </button>
+            <button
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit">
+              Añadir
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-  }
+</div>
+}
