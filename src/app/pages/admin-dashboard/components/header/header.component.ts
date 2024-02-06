@@ -18,6 +18,9 @@ import { filter } from 'rxjs';
 export class HeaderComponent {
 
   component: string | undefined = "";
+  showAddUserButton = false;
+  showAssignCouponButton = false;
+  showCreateCouponButton = false;
 
   constructor(
     private router: Router,
@@ -38,8 +41,26 @@ export class HeaderComponent {
   }
 
   updateHeaderButton() {
-    const childRoute = this.route.snapshot.firstChild;
-    this.component = childRoute?.component?.name;
+    let currentRoute = this.route;
+    while (currentRoute.firstChild) {
+      currentRoute = currentRoute.firstChild;
+    }
+    
+    currentRoute.url.subscribe(segments => {
+      this.showAddUserButton = false;
+      this.showAssignCouponButton = false;
+      this.showCreateCouponButton = false;
+      
+      const path = segments.map(s => s.path).join('/');
+      
+      if (path.includes('users') && path.includes('coupons')) {
+        this.showAssignCouponButton = true;
+      } else if (path.includes('coupons')) {
+        this.showCreateCouponButton = true;
+      } else if (path.includes('users')){
+        this.showAddUserButton = true;
+      }
+    });
   }
 
   onAddUser() {
@@ -53,5 +74,4 @@ export class HeaderComponent {
   onCreateCoupon() {
     this.addCouponModalService.setShowModal(true);
   }
-
 }
